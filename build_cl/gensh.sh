@@ -19,7 +19,7 @@ do
 	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/Fp"[^"]*pch"/\\/Fp"Debug\\\\pch.pch"/g'`
 	PROJ_OPTIONS_CPP_P=`echo $PROJ_OPTIONS`
 	PROJ_OPTIONS_PCH_P=`echo $PROJ_OPTIONS | sed 's/\\/Yu"/\\/Yc"/g'`
-	PROJ_OPTIONS_CXX_P=`echo $PROJ_OPTIONS | sed 's/\\/Yu"[^ ]* //g' | sed 's/\\/FI"[^ ]* //g' `
+	PROJ_OPTIONS_CXX_P=`echo $PROJ_OPTIONS | sed 's/\\/Yu"[^ ]* //g' | sed 's/\\/FI"[^ ]* //g'`
 	PROJ_OPTIONS_CPP=`echo $PROJ_OPTIONS_CPP_P' '$BOOST_OPTIONS | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\\\\\\\"/\\\\\\\\\\\\\\\\"/g' | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\//\\\\\\//g'`
 	PROJ_OPTIONS_PCH=`echo $PROJ_OPTIONS_PCH_P' '$BOOST_OPTIONS | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\\\\\\\"/\\\\\\\\\\\\\\\\"/g' | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\//\\\\\\//g'`
 	PROJ_OPTIONS_CXX=`echo $PROJ_OPTIONS_CXX_P' '$BOOST_OPTIONS | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\\\\\\\"/\\\\\\\\\\\\\\\\"/g' | sed 's/\\\\/\\\\\\\\/g' | sed 's/\\//\\\\\\//g'`
