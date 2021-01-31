@@ -17,7 +17,7 @@ do
 	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/Fo"[^"]*"/\\/Fo"Debug\\\\"/g'`
 	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/Fd"[^"]*pdb"/\\/Fd"Debug\\\\pdb.pdb"/g'`
 	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/Fp"[^"]*pch"/\\/Fp"Debug\\\\pch.pch"/g'`
-	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/WX/\\/WX-/g'`
+	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/\\/WX /\\/WX- /g'`
 	PROJ_OPTIONS=`echo $PROJ_OPTIONS | sed 's/ \\/machine:x86//g'`
 	PROJ_OPTIONS_CPP_P=`echo $PROJ_OPTIONS`
 	PROJ_OPTIONS_PCH_P=`echo $PROJ_OPTIONS | sed 's/\\/Yu"/\\/Yc"/g'`

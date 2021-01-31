@@ -5,9 +5,9 @@ PROJ_PATH={{PROJ_PATH}}
 PROJ_PCH_CPP={{PROJ_PCH_CPP}}
 
 m="$m"'
-CC_CPP = time clang-cl.exe --target=i686-pc-windows-msvc {{PROJ_OPTIONS_CPP}}
-CC_PCH = time clang-cl.exe --target=i686-pc-windows-msvc {{PROJ_OPTIONS_PCH}}
-CC_CXX = time clang-cl.exe --target=i686-pc-windows-msvc {{PROJ_OPTIONS_CXX}}
+CC_CPP = time clang-cl.exe --target=i386-pc-windows-msvc -Wno-invalid-token-paste -Winvalid-source-encoding -Wc++11-narrowing -Waddress-of-temporary -fms-extensions {{PROJ_OPTIONS_CPP}}
+CC_PCH = time clang-cl.exe --target=i386-pc-windows-msvc -Wno-invalid-token-paste -Winvalid-source-encoding -Wc++11-narrowing -Waddress-of-temporary -fms-extensions {{PROJ_OPTIONS_PCH}}
+CC_CXX = time clang-cl.exe --target=i386-pc-windows-msvc -Wno-invalid-token-paste -Winvalid-source-encoding -Wc++11-narrowing -Waddress-of-temporary -fms-extensions {{PROJ_OPTIONS_CXX}}
 OUTPUT_PATH = Debug
 OBJECT_FILE = '
 
