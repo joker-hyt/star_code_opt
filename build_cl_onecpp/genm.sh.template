@@ -1,0 +1,52 @@
+#!/bin/sh
+
+PROJ_FILE={{PROJ_FILE}}.vcxproj
+PROJ_PATH={{PROJ_PATH}}
+PROJ_PCH_CPP={{PROJ_PCH_CPP}}
+
+m="$m"'
+CC_CPP = time cl.exe {{PROJ_OPTIONS_CPP}}
+CC_PCH = time cl.exe {{PROJ_OPTIONS_PCH}}
+CC_CXX = time cl.exe {{PROJ_OPTIONS_CXX}}
+OUTPUT_PATH = Debug
+OBJECT_FILE = '
+
+for i in onecxx.cxx onecpp.cpp
+do
+	if [[ "$i" == "$PROJ_PCH_CPP" ]]; then
+		obj=" \\\\\n\t$i.obj$obj"
+	else
+		obj="$obj \\\\\n\t$i.obj"
+	fi
+done
+
+m="$m$obj"'
+
+All : $(OUTPUT_PATH) $(OBJECT_FILE)
+
+$(OUTPUT_PATH) :
+	mkdir Debug
+'
+
+for i in onecxx.cxx onecpp.cpp
+do
+	if [[ $i == $PROJ_PCH_CPP ]]; then
+		cpp="\n$i.obj : $i\n\t\$(CC_PCH) /c $i$cpp"
+	elif [[ $i =~ .c$ ]]; then
+		cpp="$cpp\n$i.obj : $i\n\t\$(CC_CXX) /c $i"
+	elif [[ $i =~ SoundCardData.cpp$ ]]; then
+		cpp="$cpp\n$i.obj : $i\n\t\$(CC_CXX) /c $i"
+	elif [[ $i =~ SoundCardVista.cpp$ ]]; then
+		cpp="$cpp\n$i.obj : $i\n\t\$(CC_CXX) /c $i"
+	else
+		cpp="$cpp\n$i.obj : $i\n\t\$(CC_CXX) /c $i"
+	fi
+done
+
+m="$m$cpp"'
+
+clean :
+	rm -rf Debug
+'
+
+echo -e "$m" > Makefile

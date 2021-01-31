@@ -1,0 +1,29 @@
+#!/bin/sh
+
+PROJ_FILE={{PROJ_FILE}}.vcxproj
+PROJ_PATH={{PROJ_PATH}}
+PROJ_PCH_CPP={{PROJ_PCH_CPP}}
+
+onecpp=""
+onecxx=""
+
+for i in `cat $PROJ_PATH/$PROJ_FILE | grep ".*\.c[p]\{0,2\}\"" | grep -v '\<module_test\>' | awk -F "\"" '{print$2}' | sed -e "s/\\\\\\\\/\//g"`
+do
+	if [[ $i == $PROJ_PCH_CPP ]]; then
+		cpp="#include \"$PROJ_PATH/$i\"\n$cpp"
+	elif [[ $i =~ .c$ ]]; then
+		cxx="$cxx\n#include \"$PROJ_PATH/$i\""
+	elif [[ $i =~ SoundCardData.cpp$ ]]; then
+		cxx="$cxx\n#include \"$PROJ_PATH/$i\""
+	elif [[ $i =~ SoundCardVista.cpp$ ]]; then
+		cxx="$cxx\n#include \"$PROJ_PATH/$i\""
+	else
+		cpp="$cpp\n#include \"$PROJ_PATH/$i\""
+	fi
+done
+
+onecpp="$onecpp$cpp"
+onecxx="$onecxx$cxx"
+
+echo -e "$onecpp" > onecpp.cpp
+echo -e "$onecxx" > onecxx.cxx
